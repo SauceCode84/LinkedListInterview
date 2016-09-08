@@ -82,11 +82,9 @@ namespace LinkedListInterview
         public IEnumerator<T> GetEnumerator()
         {
             var node = GetFirstNode();
-
             while (node != null)
             {
                 yield return node.Value;
-
                 node = node.NextNode;
             }
             
@@ -99,7 +97,8 @@ namespace LinkedListInterview
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            first = null;
+            node = null;
         }
 
         public bool Contains(T item)
@@ -132,6 +131,9 @@ namespace LinkedListInterview
                 Console.WriteLine(Item);
             }
             Console.WriteLine("Number of Items: " + LL.Count());
+            Console.WriteLine("Before Clear");
+            LL.Clear();
+            Console.WriteLine("After Clear Count: " + LL.Count());
             Console.ReadKey();
         }
 
