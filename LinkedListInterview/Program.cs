@@ -29,10 +29,25 @@ namespace LinkedListInterview
         private Node<T> first;
 
         public int Count
-        {
+        {         
             get
             {
-                throw new NotImplementedException();
+
+                if (first == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    int itemcount = 0;
+                    var countnode = first;
+                    while (countnode != null)
+                    {
+                        itemcount++;
+                        countnode = countnode.NextNode;
+                    }
+                    return itemcount;
+                }
             }
         }
 
@@ -116,6 +131,7 @@ namespace LinkedListInterview
             {
                 Console.WriteLine(Item);
             }
+            Console.WriteLine("Number of Items: " + LL.Count());
             Console.ReadKey();
         }
 
