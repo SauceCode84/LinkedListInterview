@@ -123,7 +123,7 @@ namespace LinkedListInterview
                     {
                         return true;
                     }
-                    node = node.NextNode;
+                    containsnode = containsnode.NextNode;
                 }
                 return false;
             }
@@ -149,15 +149,21 @@ namespace LinkedListInterview
                 Node<T> previousnode = null;
                 Node<T> removenode = first;
                 while (removenode != null)
-                {
-                    if ((removenode.Value.ToString() == item.ToString()) && (Count > 1))
+                {                               
+                    if (removenode.Value.ToString() == item.ToString())
                     {
+                        if (removenode == first)
+                        {
+                            first = removenode.NextNode;
+                            return true;
+                        }
+                        else if (removenode == last)
+                        {
+                            previousnode.NextNode = null;
+                            return true;
+                        }
                         previousnode.NextNode = removenode.NextNode;
                         return true;
-                    }
-                    else if(removenode == first)
-                    {
-                        first = removenode.NextNode;
                     }
                     previousnode = removenode;
                     removenode = removenode.NextNode;
@@ -183,7 +189,12 @@ namespace LinkedListInterview
             Console.WriteLine("Number of Items: " + LL.Count());
             Console.WriteLine("Does LinkedList Contain Mon?");
             Console.WriteLine(LL.Contains("Mon"));
-            Console
+            Console.WriteLine("Remove Tue");
+            LL.Remove("Tue");
+            foreach (var Item in LL)
+            {
+                Console.WriteLine(Item);
+            }
             Console.WriteLine("Before Clear");
             LL.Clear();
             Console.WriteLine("After Clear Count: " + LL.Count());
