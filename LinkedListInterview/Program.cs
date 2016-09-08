@@ -189,8 +189,8 @@ namespace LinkedListInterview
             Console.WriteLine("Number of Items: " + LL.Count());
             Console.WriteLine("Does LinkedList Contain Mon?");
             Console.WriteLine(LL.Contains("Mon"));
-            Console.WriteLine("Remove Tue");
-            LL.Remove("Tue");
+            Console.WriteLine("Remove Wen");
+            LL.Remove("Wen");
             foreach (var Item in LL)
             {
                 Console.WriteLine(Item);
