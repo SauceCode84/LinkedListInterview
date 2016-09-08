@@ -52,6 +52,7 @@ namespace LinkedListInterview
             }
         }
 
+        //I Dont Understand This Method Exactly
         public bool IsReadOnly
         {
             get
