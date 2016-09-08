@@ -27,6 +27,7 @@ namespace LinkedListInterview
     {
         private Node<T> node;
         private Node<T> first;
+        private Node<T> last;
 
         public int Count
         {         
@@ -63,6 +64,10 @@ namespace LinkedListInterview
         {
             return first;
         }
+        public Node<T> GetLastNode()
+        {
+            return last;
+        }
         
         public void Add(T Value)
         {
@@ -71,11 +76,13 @@ namespace LinkedListInterview
             {
                 this.node = node;
                 this.first = node;
+                this.last = node;
             }
             else
             {
                 this.node.NextNode = node;
                 this.node = node;
+                this.last = node;
             }
         }
 
@@ -129,7 +136,34 @@ namespace LinkedListInterview
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            if(first == null)
+            {
+                return false;
+            }
+            else if(Contains(item) == false)
+            {
+                return false;
+            }
+            else
+            {
+                Node<T> previousnode = null;
+                Node<T> removenode = first;
+                while (removenode != null)
+                {
+                    if ((removenode.Value.ToString() == item.ToString()) && (Count > 1))
+                    {
+                        previousnode.NextNode = removenode.NextNode;
+                        return true;
+                    }
+                    else if(removenode == first)
+                    {
+                        first = removenode.NextNode;
+                    }
+                    previousnode = removenode;
+                    removenode = removenode.NextNode;
+                }
+                return false;
+            }
         }
     }
 
@@ -149,6 +183,7 @@ namespace LinkedListInterview
             Console.WriteLine("Number of Items: " + LL.Count());
             Console.WriteLine("Does LinkedList Contain Mon?");
             Console.WriteLine(LL.Contains("Mon"));
+            Console
             Console.WriteLine("Before Clear");
             LL.Clear();
             Console.WriteLine("After Clear Count: " + LL.Count());
