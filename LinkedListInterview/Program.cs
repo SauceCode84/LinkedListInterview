@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace LinkedListInterview
 {
-    class Program
+    public class LinkedList<T>
     {
-        static void Main(string[] args)
+        // your code goes here
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
         {
         }
     }
