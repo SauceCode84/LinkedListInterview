@@ -17,6 +17,7 @@ namespace LinkedListInterview
     {
         public static void Main(string[] args)
         {
+            Node<string> testNode = new Node<string>("Mon");
         }
     }
 
