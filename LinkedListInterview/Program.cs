@@ -103,7 +103,23 @@ namespace LinkedListInterview
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            if(first == null)
+            {
+                return false;
+            }
+            else
+            {
+                Node<T> containsnode = first;
+                while (containsnode != null)
+                {
+                    if(containsnode.Value.ToString() == item.ToString())
+                    {
+                        return true;
+                    }
+                    node = node.NextNode;
+                }
+                return false;
+            }
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -131,6 +147,8 @@ namespace LinkedListInterview
                 Console.WriteLine(Item);
             }
             Console.WriteLine("Number of Items: " + LL.Count());
+            Console.WriteLine("Does LinkedList Contain Mon?");
+            Console.WriteLine(LL.Contains("Mon"));
             Console.WriteLine("Before Clear");
             LL.Clear();
             Console.WriteLine("After Clear Count: " + LL.Count());
