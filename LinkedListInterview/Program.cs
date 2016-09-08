@@ -40,7 +40,7 @@ namespace LinkedListInterview
                 else
                 {
                     int itemcount = 0;
-                    var countnode = first;
+                    Node<T> countnode = first;
                     while (countnode != null)
                     {
                         itemcount++;
