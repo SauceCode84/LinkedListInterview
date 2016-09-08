@@ -22,34 +22,9 @@ namespace LinkedListInterview
 
     public class Node<T>
     {
-        private T value;
-        private Node<T> nextNode;
+        public T Value { get; private set; }
 
-        public T Value
-        {
-            get
-            {
-                return value;
-            }
-
-            private set
-            {
-                this.value = value;
-            }
-        }
-
-        public Node<T> NextNode
-        {
-            get
-            {
-                return nextNode;
-            }
-
-            set
-            {
-                nextNode = value;
-            }
-        }
+        public Node<T> NextNode { get; set; }
 
         public Node(T value)
         {
