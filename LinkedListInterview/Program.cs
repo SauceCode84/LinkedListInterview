@@ -131,7 +131,14 @@ namespace LinkedListInterview
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Node<T> node = first;
+            int indexcount = arrayIndex;
+            while (node != null)
+            {
+                array[indexcount] = node.Value;
+                indexcount++;       
+                node = node.NextNode;
+            }
         }
 
         public bool Remove(T item)
@@ -194,6 +201,13 @@ namespace LinkedListInterview
             foreach (var Item in LL)
             {
                 Console.WriteLine(Item);
+            }
+            Console.WriteLine("Copy To Array");
+            string[] daysoftheweek = new string[7];
+            LL.CopyTo(daysoftheweek, 3);
+            foreach(string Day in daysoftheweek)
+            {
+                Console.WriteLine(Day);             
             }
             Console.WriteLine("Before Clear");
             LL.Clear();
