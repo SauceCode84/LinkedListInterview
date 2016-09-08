@@ -6,19 +6,6 @@ using System.Threading.Tasks;
 
 namespace LinkedListInterview
 {
-    public class LinkedList<T>
-    {
-        // your code goes here
-        // tesing 123
-       
-    }
-
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-        }
-    }
 
     public class Node<T>
     {
@@ -31,4 +18,20 @@ namespace LinkedListInterview
             Value = value;
         }
     }
+
+    public class LinkedList<T>
+    {
+
+        private Node<T> node;
+       
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+        }
+    }
+
+    
 }
