@@ -52,13 +52,10 @@ namespace LinkedListInterview
             }
         }
 
-        //I Dont Understand This Method Exactly
         public bool IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            // this method is not readonly, i.e. you can add and remove items
+            get { return false; }
         }
 
         public Node<T> GetFirstNode()
