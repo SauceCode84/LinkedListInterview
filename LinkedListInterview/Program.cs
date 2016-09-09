@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedListInterview
 {
@@ -23,7 +21,9 @@ namespace LinkedListInterview
         }
     }
 
-    public class LinkedList<T> : IEnumerable<T>, ICollection<T>
+    public class LinkedList<T> :
+        IEnumerable<T>,
+        ICollection<T>
     {
         private Node<T> node;
         private Node<T> first;
@@ -141,11 +141,11 @@ namespace LinkedListInterview
 
         public bool Remove(T item)
         {
-            if(first == null)
+            if (first == null)
             {
                 return false;
             }
-            else if(Contains(item) == false)
+            else if (Contains(item) == false)
             {
                 return false;
             }
@@ -154,7 +154,7 @@ namespace LinkedListInterview
                 Node<T> previousnode = null;
                 Node<T> removenode = first;
                 while (removenode != null)
-                {                               
+                {
                     if (removenode.Value.ToString() == item.ToString())
                     {
                         if (removenode == first)
@@ -182,34 +182,43 @@ namespace LinkedListInterview
     {
         public static void Main(string[] args)
         {
-            LinkedList<String> LL = new LinkedList<string>();
-            LL.Add("Mon");
-            LL.Add("Tue");
-            LL.Add("Wen");
+            LinkedList<string> linkedList = new LinkedList<string>();
+            linkedList.Add("Mon");
+            linkedList.Add("Tue");
+            linkedList.Add("Wed");
 
-            foreach(var Item in LL)
+            foreach(string item in linkedList)
             {
-                Console.WriteLine(Item);
+                Console.WriteLine(item);
             }
-            Console.WriteLine("Number of Items: " + LL.Count());
+
+            Console.WriteLine("Number of Items: " + linkedList.Count);
             Console.WriteLine("Does LinkedList Contain Mon?");
-            Console.WriteLine(LL.Contains("Mon"));
-            Console.WriteLine("Remove Wen");
-            LL.Remove("Wen");
-            foreach (var Item in LL)
+            Console.WriteLine(linkedList.Contains("Mon"));
+
+            Console.WriteLine("Remove Wed");
+            linkedList.Remove("Wed");
+
+            foreach (var item in linkedList)
             {
-                Console.WriteLine(Item);
+                Console.WriteLine(item);
             }
+
             Console.WriteLine("Copy To Array");
-            string[] daysoftheweek = new string[7];
-            LL.CopyTo(daysoftheweek, 3);
-            foreach(string Day in daysoftheweek)
+            string[] daysOfTheWeek = new string[7];
+            linkedList.CopyTo(daysOfTheWeek, 3);
+
+            foreach (string day in daysOfTheWeek)
             {
-                Console.WriteLine(Day);             
+                Console.WriteLine(day);             
             }
+
             Console.WriteLine("Before Clear");
-            LL.Clear();
-            Console.WriteLine("After Clear Count: " + LL.Count());
+
+            linkedList.Clear();
+
+            Console.WriteLine("After Clear Count: " + linkedList.Count);
+
             Console.ReadKey();
         }
 
@@ -218,6 +227,4 @@ namespace LinkedListInterview
         //Implement ienumerator of T
         //implement icoolection
     }
-
-    
 }
