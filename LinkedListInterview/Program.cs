@@ -178,6 +178,18 @@ namespace LinkedListInterview
         }
     }
 
+    public class Laptop
+    {
+        private string type;
+        private string processor;
+        private string ram;
+        private string screenSize;
+        
+        public Laptop(string type, string processor, string ram, string screenSize)
+        {
+
+        } 
+    }
     public class Program
     {
         public static void Main(string[] args)
