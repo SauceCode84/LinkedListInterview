@@ -317,13 +317,15 @@ namespace LinkedListInterview
             Console.WriteLine("After Clear Count: " + LL.Count());
             Console.WriteLine("Press Any Key to Test Laptop Class.........");
             Console.ReadKey();
-            Console.WriteLine("");
+            Console.WriteLine("Laptops");
+            Laptops LPS = new Laptops();
+            foreach(Laptop LP in LPS)
+            {
+               Console.WriteLine("Type: " + LP.Type + "\n" + "Screen Size: " + LP.ScreenSize + "\n" + "RAM: " + LP.Ram + "\n" + "Processor: " + LP.Processor);
+               Console.WriteLine("");
+            }
+            Console.ReadKey();
         }
-
-        //Try doublely linked list
-        //
-        //Implement ienumerator of T
-        //implement icoolection
     }
 
     
