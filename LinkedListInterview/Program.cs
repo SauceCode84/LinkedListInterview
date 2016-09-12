@@ -184,10 +184,65 @@ namespace LinkedListInterview
         private string processor;
         private string ram;
         private string screenSize;
-        
+
+        public string Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                type = value;
+            }
+        }
+
+        public string Processor
+        {
+            get
+            {
+                return processor;
+            }
+
+            set
+            {
+                processor = value;
+            }
+        }
+
+        public string Ram
+        {
+            get
+            {
+                return ram;
+            }
+
+            set
+            {
+                ram = value;
+            }
+        }
+
+        public string ScreenSize
+        {
+            get
+            {
+                return screenSize;
+            }
+
+            set
+            {
+                screenSize = value;
+            }
+        }
+
         public Laptop(string type, string processor, string ram, string screenSize)
         {
-
+            this.Type = type;
+            this.Processor = processor;
+            this.Ram = ram;
+            this.ScreenSize = screenSize;
         } 
     }
     public class Program
