@@ -245,6 +245,44 @@ namespace LinkedListInterview
             this.ScreenSize = screenSize;
         } 
     }
+    public class Laptops : IEnumerator, IEnumerable
+    {
+        private Laptop[] LaptopList;
+        private int Count;
+        public Laptops()
+        {
+            Count = -1;
+            LaptopList = new Laptop[3]
+            {
+                new Laptop("Gigabyte","Quad Core 3.4GHz","16 GB DDR3 1333MHz","17 inch"),
+                new Laptop("Asus","Dual Core 2.2GHz","4 GB DDR3 800MHz","15 inch"),
+                new Laptop("Dell","Single Core 3.4GHz","2 GB DDR2 800MHz","18 inch")
+            };
+        }
+        public object Current
+        {
+            get
+            {
+                return LaptopList[Count];
+            }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
+
+        public bool MoveNext()
+        {
+            Count++;
+            return (Count < LaptopList.Length);
+        }
+
+        public void Reset()
+        {
+            Count = 0;
+        }
+    }
     public class Program
     {
         public static void Main(string[] args)
@@ -277,7 +315,9 @@ namespace LinkedListInterview
             Console.WriteLine("Before Clear");
             LL.Clear();
             Console.WriteLine("After Clear Count: " + LL.Count());
+            Console.WriteLine("Press Any Key to Test Laptop Class.........");
             Console.ReadKey();
+            Console.WriteLine("");
         }
 
         //Try doublely linked list
