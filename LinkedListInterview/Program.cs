@@ -2,53 +2,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedListInterview
 {
 
     public class Node<T>
     {
-
-        //public Node<T> LastNode { get; set}
-        public T Value { get; private set; }
-
-        public Node<T> NextNode { get; set; }
-
-
         public Node(T value)
         {
             Value = value;
         }
+
+        public T Value { get; private set; }
+
+        public Node<T> NextNode { get; set; }
     }
 
-    public class LinkedList<T> : IEnumerable<T>, ICollection<T>
+    public class LinkedList<T> :
+        IEnumerable<T>,
+        ICollection<T>
     {
-        private Node<T> node;
         private Node<T> first;
         private Node<T> last;
 
         public int Count
-        {         
+        {
             get
             {
-
                 if (first == null)
                 {
                     return 0;
                 }
-                else
+
+                int count = 0;
+                Node<T> countNode = first;
+
+                while (countNode != null)
                 {
-                    int itemcount = 0;
-                    Node<T> countnode = first;
-                    while (countnode != null)
-                    {
-                        itemcount++;
-                        countnode = countnode.NextNode;
-                    }
-                    return itemcount;
+                    count++;
+                    countNode = countNode.NextNode;
                 }
+
+                return count;
             }
         }
 
@@ -58,71 +53,79 @@ namespace LinkedListInterview
             get { return false; }
         }
 
-        public Node<T> GetFirstNode()
+        // GetFirstNode and GetLastNode aren't necessary any more
+        /*public Node<T> GetFirstNode()
         {
             return first;
         }
+
         public Node<T> GetLastNode()
         {
             return last;
-        }
-        
+        }*/
+
         public void Add(T Value)
         {
             Node<T> node = new Node<T>(Value);
-            if (this.node==null)
+
+            if (first == null)
             {
-                this.node = node;
-                this.first = node;
-                this.last = node;
+                first = node;
+                last = node;
             }
             else
             {
-                this.node.NextNode = node;
-                this.node = node;
-                this.last = node;
+                last.NextNode = node;
+                last = node;
             }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            var node = GetFirstNode();
+            // take this "enumerator" out...
+            /*var node = GetFirstNode();
             while (node != null)
             {
                 yield return node.Value;
                 node = node.NextNode;
-            }
-            
+            }*/
+
+            // ...and use the implementation of the LinkedListEnumerator
+            // NOTE! the constructor may not be correct/require more parameters
+            return new LinkedListEnumerator<T>();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public void Clear()
         {
             first = null;
-            node = null;
+            last = null;
         }
 
         public bool Contains(T item)
         {
-            if(first == null)
+            if (first == null)
             {
                 return false;
             }
             else
             {
-                Node<T> containsnode = first;
-                while (containsnode != null)
+                Node<T> searchNode = first;
+
+                while (searchNode != null)
                 {
-                    if(containsnode.Value.ToString() == item.ToString())
+                    if (searchNode.Value.ToString() == item.ToString())
                     {
                         return true;
                     }
-                    containsnode = containsnode.NextNode;
+
+                    searchNode = searchNode.NextNode;
                 }
+
                 return false;
             }
         }
@@ -130,203 +133,103 @@ namespace LinkedListInterview
         public void CopyTo(T[] array, int arrayIndex)
         {
             Node<T> node = first;
-            int indexcount = arrayIndex;
+
+            int index = arrayIndex;
+
             while (node != null)
             {
-                array[indexcount] = node.Value;
-                indexcount++;       
+                array[index++] = node.Value;
                 node = node.NextNode;
             }
         }
 
         public bool Remove(T item)
         {
-            if(first == null)
+            if (first == null)
             {
                 return false;
             }
-            else if(Contains(item) == false)
+
+            if (!Contains(item) == false)
             {
                 return false;
             }
-            else
+
+            Node<T> previousNode = null;
+            Node<T> removeNode = first;
+
+            while (removeNode != null)
             {
-                Node<T> previousnode = null;
-                Node<T> removenode = first;
-                while (removenode != null)
-                {                               
-                    if (removenode.Value.ToString() == item.ToString())
+                if (removeNode.Value.ToString() == item.ToString())
+                {
+                    if (removeNode == first)
                     {
-                        if (removenode == first)
-                        {
-                            first = removenode.NextNode;
-                            return true;
-                        }
-                        else if (removenode == last)
-                        {
-                            previousnode.NextNode = null;
-                            return true;
-                        }
-                        previousnode.NextNode = removenode.NextNode;
+                        first = removeNode.NextNode;
                         return true;
                     }
-                    previousnode = removenode;
-                    removenode = removenode.NextNode;
+                    else if (removeNode == last)
+                    {
+                        previousNode.NextNode = null;
+                        return true;
+                    }
+                    previousNode.NextNode = removeNode.NextNode;
+                    return true;
                 }
-                return false;
+
+                previousNode = removeNode;
+                removeNode = removeNode.NextNode;
             }
+
+            return false;
         }
     }
 
-    public class Laptop
+    public class LinkedListEnumerator<T> :
+        IEnumerator<T>
     {
-        private string type;
-        private string processor;
-        private string ram;
-        private string screenSize;
-
-        public string Type
-        {
-            get
-            {
-                return type;
-            }
-
-            set
-            {
-                type = value;
-            }
-        }
-
-        public string Processor
-        {
-            get
-            {
-                return processor;
-            }
-
-            set
-            {
-                processor = value;
-            }
-        }
-
-        public string Ram
-        {
-            get
-            {
-                return ram;
-            }
-
-            set
-            {
-                ram = value;
-            }
-        }
-
-        public string ScreenSize
-        {
-            get
-            {
-                return screenSize;
-            }
-
-            set
-            {
-                screenSize = value;
-            }
-        }
-
-        public Laptop(string type, string processor, string ram, string screenSize)
-        {
-            this.Type = type;
-            this.Processor = processor;
-            this.Ram = ram;
-            this.ScreenSize = screenSize;
-        } 
+        // implement this for the linked list...
     }
-    public class Laptops : IEnumerator, IEnumerable
-    {
-        private Laptop[] LaptopList;
-        private int Count;
-        public Laptops()
-        {
-            Count = -1;
-            LaptopList = new Laptop[3]
-            {
-                new Laptop("Gigabyte","Quad Core 3.4GHz","16 GB DDR3 1333MHz","17 inch"),
-                new Laptop("Asus","Dual Core 2.2GHz","4 GB DDR3 800MHz","15 inch"),
-                new Laptop("Dell","Single Core 3.4GHz","2 GB DDR2 800MHz","18 inch")
-            };
-        }
-        public object Current
-        {
-            get
-            {
-                return LaptopList[Count];
-            }
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return this;
-        }
-
-        public bool MoveNext()
-        {
-            Count++;
-            return (Count < LaptopList.Length);
-        }
-
-        public void Reset()
-        {
-            Count = 0;
-        }
-    }
+    
     public class Program
     {
         public static void Main(string[] args)
         {
-            LinkedList<String> LL = new LinkedList<string>();
-            LL.Add("Mon");
-            LL.Add("Tue");
-            LL.Add("Wen");
+            LinkedList<string> linkedList = new LinkedList<string>();
+            linkedList.Add("Mon");
+            linkedList.Add("Tue");
+            linkedList.Add("Wed");
 
-            foreach(var Item in LL)
+            foreach(string item in linkedList)
             {
-                Console.WriteLine(Item);
+                Console.WriteLine(item);
             }
-            Console.WriteLine("Number of Items: " + LL.Count());
+
+            Console.WriteLine("Number of Items: " + linkedList.Count);
             Console.WriteLine("Does LinkedList Contain Mon?");
-            Console.WriteLine(LL.Contains("Mon"));
-            Console.WriteLine("Remove Wen");
-            LL.Remove("Wen");
-            foreach (var Item in LL)
+            Console.WriteLine(linkedList.Contains("Mon"));
+
+            Console.WriteLine("Remove Wed");
+            linkedList.Remove("Wed");
+
+            foreach (var item in linkedList)
             {
-                Console.WriteLine(Item);
+                Console.WriteLine(item);
             }
+
             Console.WriteLine("Copy To Array");
-            string[] daysoftheweek = new string[7];
-            LL.CopyTo(daysoftheweek, 3);
-            foreach(string Day in daysoftheweek)
+            string[] daysOfTheWeek = new string[7];
+            linkedList.CopyTo(daysOfTheWeek, 3);
+
+            foreach (string day in daysOfTheWeek)
             {
-                Console.WriteLine(Day);             
+                Console.WriteLine(day);             
             }
+
             Console.WriteLine("Before Clear");
-            LL.Clear();
-            Console.WriteLine("After Clear Count: " + LL.Count());
-            Console.WriteLine("Press Any Key to Test Laptop Class.........");
-            Console.ReadKey();
-            Console.WriteLine("Laptops");
-            Laptops LPS = new Laptops();
-            foreach(Laptop LP in LPS)
-            {
-               Console.WriteLine("Type: " + LP.Type + "\n" + "Screen Size: " + LP.ScreenSize + "\n" + "RAM: " + LP.Ram + "\n" + "Processor: " + LP.Processor);
-               Console.WriteLine("");
-            }
+            linkedList.Clear();
+            Console.WriteLine("After Clear Count: " + linkedList.Count());
+            
             Console.ReadKey();
         }
     }
-
-    
 }
