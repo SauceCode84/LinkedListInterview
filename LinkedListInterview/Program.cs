@@ -178,6 +178,111 @@ namespace LinkedListInterview
         }
     }
 
+    public class Laptop
+    {
+        private string type;
+        private string processor;
+        private string ram;
+        private string screenSize;
+
+        public string Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                type = value;
+            }
+        }
+
+        public string Processor
+        {
+            get
+            {
+                return processor;
+            }
+
+            set
+            {
+                processor = value;
+            }
+        }
+
+        public string Ram
+        {
+            get
+            {
+                return ram;
+            }
+
+            set
+            {
+                ram = value;
+            }
+        }
+
+        public string ScreenSize
+        {
+            get
+            {
+                return screenSize;
+            }
+
+            set
+            {
+                screenSize = value;
+            }
+        }
+
+        public Laptop(string type, string processor, string ram, string screenSize)
+        {
+            this.Type = type;
+            this.Processor = processor;
+            this.Ram = ram;
+            this.ScreenSize = screenSize;
+        } 
+    }
+    public class Laptops : IEnumerator, IEnumerable
+    {
+        private Laptop[] LaptopList;
+        private int Count;
+        public Laptops()
+        {
+            Count = -1;
+            LaptopList = new Laptop[3]
+            {
+                new Laptop("Gigabyte","Quad Core 3.4GHz","16 GB DDR3 1333MHz","17 inch"),
+                new Laptop("Asus","Dual Core 2.2GHz","4 GB DDR3 800MHz","15 inch"),
+                new Laptop("Dell","Single Core 3.4GHz","2 GB DDR2 800MHz","18 inch")
+            };
+        }
+        public object Current
+        {
+            get
+            {
+                return LaptopList[Count];
+            }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
+
+        public bool MoveNext()
+        {
+            Count++;
+            return (Count < LaptopList.Length);
+        }
+
+        public void Reset()
+        {
+            Count = 0;
+        }
+    }
     public class Program
     {
         public static void Main(string[] args)
@@ -210,13 +315,17 @@ namespace LinkedListInterview
             Console.WriteLine("Before Clear");
             LL.Clear();
             Console.WriteLine("After Clear Count: " + LL.Count());
+            Console.WriteLine("Press Any Key to Test Laptop Class.........");
+            Console.ReadKey();
+            Console.WriteLine("Laptops");
+            Laptops LPS = new Laptops();
+            foreach(Laptop LP in LPS)
+            {
+               Console.WriteLine("Type: " + LP.Type + "\n" + "Screen Size: " + LP.ScreenSize + "\n" + "RAM: " + LP.Ram + "\n" + "Processor: " + LP.Processor);
+               Console.WriteLine("");
+            }
             Console.ReadKey();
         }
-
-        //Try doublely linked list
-        //
-        //Implement ienumerator of T
-        //implement icoolection
     }
 
     
