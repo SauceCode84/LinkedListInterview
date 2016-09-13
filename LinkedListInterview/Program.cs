@@ -184,12 +184,41 @@ namespace LinkedListInterview
         }
     }
 
-    public class LinkedListEnumerator<T> :
-        IEnumerator<T>
+    public class LinkedListEnumerator<T> : IEnumerator<T>
     {
         // implement this for the linked list...
+        public T Current
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MoveNext()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
     }
-    
+
     public class Program
     {
         public static void Main(string[] args)
