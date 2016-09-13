@@ -18,9 +18,7 @@ namespace LinkedListInterview
         public Node<T> NextNode { get; set; }
     }
 
-    public class LinkedList<T> :
-        IEnumerable<T>,
-        ICollection<T>
+    public class LinkedList<T> : IEnumerable<T>, ICollection<T>
     {
         private Node<T> first;
         private Node<T> last;
@@ -92,7 +90,7 @@ namespace LinkedListInterview
 
             // ...and use the implementation of the LinkedListEnumerator
             // NOTE! the constructor may not be correct/require more parameters
-            return new LinkedListEnumerator<T>();
+            return new LinkedListEnumerator<T>(first);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -186,12 +184,19 @@ namespace LinkedListInterview
 
     public class LinkedListEnumerator<T> : IEnumerator<T>
     {
+        Node<T> FirstNode;
+        Node<T> node;
         // implement this for the linked list...
+        public LinkedListEnumerator(Node<T> node)
+        {
+            this.node = node;
+            FirstNode = node;
+        }
         public T Current
         {
             get
             {
-                throw new NotImplementedException();
+                return node.Value;
             }
         }
 
@@ -199,23 +204,31 @@ namespace LinkedListInterview
         {
             get
             {
-                throw new NotImplementedException();
+                return node;
             }
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            node = null;
         }
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            if (node.NextNode != null)
+            {
+                node = node.NextNode;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            node = FirstNode;
         }
     }
 
