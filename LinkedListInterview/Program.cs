@@ -73,6 +73,8 @@ namespace LinkedListInterview
             }
             else
             {
+                //first.NextNode = node;
+                //first = node;
                 last.NextNode = node;
                 last = node;
             }
@@ -236,41 +238,59 @@ namespace LinkedListInterview
     {
         public static void Main(string[] args)
         {
-            LinkedList<string> linkedList = new LinkedList<string>();
-            linkedList.Add("Mon");
-            linkedList.Add("Tue");
-            linkedList.Add("Wed");
+            //LinkedList<string> linkedList = new LinkedList<string>();
+            //linkedList.Add("Mon");
+            //linkedList.Add("Tue");
+            //linkedList.Add("Wed");
 
-            foreach(string item in linkedList)
+            //foreach(string item in linkedList)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //Console.WriteLine("Number of Items: " + linkedList.Count);
+            //Console.WriteLine("Does LinkedList Contain Mon?");
+            //Console.WriteLine(linkedList.Contains("Mon"));
+
+            //Console.WriteLine("Remove Wed");
+            //linkedList.Remove("Wed");
+
+            //foreach (var item in linkedList)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //Console.WriteLine("Copy To Array");
+            //string[] daysOfTheWeek = new string[7];
+            //linkedList.CopyTo(daysOfTheWeek, 3);
+
+            //foreach (string day in daysOfTheWeek)
+            //{
+            //    Console.WriteLine(day);             
+            //}
+
+            //Console.WriteLine("Before Clear");
+            //linkedList.Clear();
+            //Console.WriteLine("After Clear Count: " + linkedList.Count());
+
+
+            LinkedList<string> DaysOfTheWeek = new LinkedList<string>();
+            DaysOfTheWeek.Add("Monday");
+            DaysOfTheWeek.Add("Tuesday");
+            DaysOfTheWeek.Add("Wensday");
+            DaysOfTheWeek.Add("Thursday");
+            DaysOfTheWeek.Add("Friday");
+            DaysOfTheWeek.Add("Saturday");
+            DaysOfTheWeek.Add("Sunday");
+
+            var Result = DaysOfTheWeek.Where(d => d.StartsWith("M"));
+
+            //Console.WriteLine(DaysOfTheWeek.Count.ToString());
+            foreach(var Item in DaysOfTheWeek)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(Item);
             }
 
-            Console.WriteLine("Number of Items: " + linkedList.Count);
-            Console.WriteLine("Does LinkedList Contain Mon?");
-            Console.WriteLine(linkedList.Contains("Mon"));
-
-            Console.WriteLine("Remove Wed");
-            linkedList.Remove("Wed");
-
-            foreach (var item in linkedList)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine("Copy To Array");
-            string[] daysOfTheWeek = new string[7];
-            linkedList.CopyTo(daysOfTheWeek, 3);
-
-            foreach (string day in daysOfTheWeek)
-            {
-                Console.WriteLine(day);             
-            }
-
-            Console.WriteLine("Before Clear");
-            linkedList.Clear();
-            Console.WriteLine("After Clear Count: " + linkedList.Count());
-            
             Console.ReadKey();
         }
     }
